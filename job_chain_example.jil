@@ -1,0 +1,24 @@
+insert_job: job_chain_box
+job_type: b
+box_name: job_chain_box
+command: echo "Box Job"
+
+insert_job: extract_data_job
+job_type: c
+box_name: job_chain_box
+command: /apps/scripts/extract_data.sh
+machine: batch-server
+owner: autosys_user
+condition: success(job_chain_box)
+std_out_file: /logs/extract_data.out
+std_err_file: /logs/extract_data.err
+
+insert_job: load_data_job
+job_type: c
+box_name: job_chain_box
+command: /apps/scripts/load_data.sh
+machine: batch-server
+owner: autosys_user
+condition: success(extract_data_job)
+std_out_file: /logs/load_data.out
+std_err_file: /logs/load_data.err
