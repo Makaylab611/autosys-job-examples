@@ -1,0 +1,9 @@
+insert_job: sample_batch_job
+job_type: c
+command: /apps/scripts/run_etl.sh
+machine: dev-server
+owner: autosys_user
+permission: gx, mx
+std_out_file: /logs/sample_batch_job.out
+std_err_file: /logs/sample_batch_job.err
+alarm_if_fail: 1
